@@ -1,0 +1,92 @@
+{% extends 'basic.html' %}
+ {% block titleh %}
+    Signup - Vegcheap | Signup with Vegcheap | Register with Vegcheap | Register on Vegcheap | Register and place order   
+    {% endblock titleh%}
+{% block meta %}
+   <meta name="description" property="og:description" content="This is signup page of vegcheap.com , Please Signup with Vegcheap and register your account before placing order, Create your account here on Vegcheap for free, Signup with Vegcheap, Register an place order, Register with Vegcheap   ">
+  <meta name="keywords" content="Vegcheap signup, signup Vegcheap, Register with Vegcheap, Vegcheap register, Vegcheap account, veg cheap signup">
+    {% endblock meta %}
+{% block css %}
+body{
+background-color: #FCB;
+}
+    {% endblock css %}
+{% block title %} signup page{% endblock title %}
+
+
+{% block body %}
+<div class = "container-fluid px-0 mb-4">
+<img src="https://source.unsplash.com/1200x400/?login,account" class="d-block w-100 " alt="...">
+</div>
+
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+
+<!-- Custom styles for this template -->
+
+<body class="text-center">
+
+  <form class="form-signin" style="margin: 65px;" method="POST" action={% url 'signup' %}>
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal" id="signupModal">Sign up here</h1>
+    <label for="username1">Username</label>
+    <input type="text" id="username1" name="username1" class="form-control my-2" placeholder="Enter Username" required autofocus>
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" class="form-control my-2" placeholder="Email" required autofocus>
+    <label for="fullname">Fullname</label>
+    <input type="text" id="fullname" name="fullname" class="form-control my-2" placeholder="Full Name" required autofocus>
+    <label for="pass1" class="visuallys-hidden">Password</label>
+    <input type="password" id="Pass1" name="pass1" class="form-control my-2" placeholder="Password" required>
+    <label for="pass2" class="visuallys-hidden">Confirm Password</label>
+    <input type="password" id="pass2" name="pass2" class="form-control my-2" placeholder="Confirm your Password" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-65 btn btn-lg btn-primary" type="submit">Sign Up
+
+    </button>
+    <p class="my-2"> Already have an account login <a href="/login" >here</a></p>  
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  </form>
+
+
+
+</body>
+
+
+{% endblock body %}
+
+
+{% comment %} {% extends 'basic.html' %}
+{% block css %}
+
+
+    {% endblock css %}
+{% block title %}Signup
+    {% endblock title %}
+    {%load crispy_forms_tags%}
+{% block body %}
+
+<form method="POST" class="form-group my-4">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-success">Signup</button>
+</form>
+{%endblock body%} {% endcomment %}

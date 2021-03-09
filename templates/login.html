@@ -1,0 +1,66 @@
+{% extends 'basic.html' %}
+ {% block titleh %}
+    Login - Vegcheap | Sign in to your Vegcheap account | Create account with Vegcheap     
+    {% endblock titleh%}
+    {% block meta %}
+   <meta name="description" property="og:description" content="This is Login page of vegcheap.com, please login before placing order on vegcheap.com, it is complusory to login before placing your orders   ">
+  <meta name="keywords" content="Vegcheap login, login Vegcheap, login with Vegcheap, Vegcheap account, Vegc heap account, veg cheap login, vegcheap.com login, login vegcheap.com">
+    {% endblock meta %}
+{% block css %}
+body{
+background-color: #FCB;
+}
+    {% endblock css %}
+{% block title %} Login page{% endblock title %}
+
+{% block body %}
+<div class = "container-fluid px-0 mb-4">
+<img src="https://source.unsplash.com/1200x400/?login,account" class="d-block w-100 " alt="...">
+</div>
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+
+<!-- Custom styles for this template -->
+
+<body class="text-center">
+
+  <form class="form-signin" style="margin: 65px;" method="POST" action={% url 'login' %}>
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <label for="inputEmail">Username</label>
+    <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+    <label for="inputPassword" class="visuallys-hidden">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-65 btn btn-lg btn-primary" type="submit">Sign in
+
+    </button>
+    <p class="my-4"> Don't have an account? Create one <a href="/signup" >here</a></p>  
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  </form>
+
+
+
+</body>
+
+
+{% endblock body %}

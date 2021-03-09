@@ -1,0 +1,125 @@
+{% extends 'basic.html' %}
+ {% block titleh %}
+    Tracker - Vegcheap | Track your Order with Vegcheap  | Vegcheap Tracker | Vegcheap Live Tracker     
+    {% endblock titleh%}
+	{% block meta %}
+   <meta name="description" property="og:description" content="Track your orders on vegcheap.com by entering your order id. Comfy live tracking function on vegcheap, place your order and start tracking it through our tracker at vegcheap.com">
+  <meta name="keywords" content="vegcheap tracker, track on vegcheap, tracker vegcheap, live tracking vegcheap, track orders on vegcheap, veg cheap tracker, tracker veg cheap, track orders on veg cheap, order tracker veg cheap">
+    {% endblock meta %}
+{% block css %}
+body{
+background-color: #fbcaca8c;
+}
+    {% endblock css %}
+{% block title %} Tracker {% endblock %}
+{% block body %} 
+
+<div class = "container-fluid px-0 mb-4">
+<img src="https://source.unsplash.com/1200x400/?tracker,gps" class="d-block w-100 " alt="...">
+</div>
+
+<div class="container">
+	<div class="col my-4">
+	<h2>Tracker - Enter your Id no. To Track your orders here.</h2>
+	<form method="POST" action="#" id="trackerForm">
+ {% csrf_token %}
+  <div class="form-row">
+  	<div class="form-group col-md-6">
+    <label for="orderId">Order Id</label>
+    <input type="text" class="form-control my-2" id="orderId" name="orderId" placeholder="Enter Your Order id">
+  </div>
+  <!-- <div class="form-group col-md-6">
+    <label for="phone">Phone Number</label>
+    <input type="tel" class="form-control my-2" id="phone" name="phone" placeholder="Enter Your Phone No.">
+</div> -->
+<button type="submit" class="btn btn-primary mt-4">Track Order</button>
+</div>
+</form>
+	</div>
+
+<div class="col my-4">
+	<h2>Your Order Status</h2>
+	<div class="my-4">
+		<ul class="list-group" id="items"> 
+			Enter your order Id and click Track order to find the details about your order 
+		</ul>
+	</div>
+
+	<h2>Your Order Details</h2>
+	<div class="my-4">
+		<ul class="list-group" id="citems"> 
+			Enter your order Id and click Track order to find the details about your order
+		</ul>
+	</div>
+	</div>
+</div>
+
+
+
+ {% endblock %}
+ {% block js %}
+
+<script> 
+$('#trackerForm').submit(function(event){
+
+$('#items').empty();
+var formData = {
+	'orderId': $('input[name=orderId]').val(),
+	'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+};
+
+$.ajax({
+	type:'POST',
+	url:'/tracker/',
+	data: formData,
+	encode: true
+})
+.done(function(data){
+$('#citems').empty();
+	data = JSON.parse(data);
+	if (data['status'] == 'success'){
+		updates = data['updates'];
+		for(i=0;i<updates.length; i++){
+			let text = updates[i]['text'];
+			let time = updates[i]['time'];
+			mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+		    			${text}
+		    			<span class="badge bg-primary rounded-pill">${time}</span>
+		  				</li>`
+			$('#items').append(mystr);
+}
+
+cart = JSON.parse(data['itemsJson']);
+console.log(cart);
+for(item in cart){
+	let name = cart[item][1];
+	let qty = cart[item][0];
+	mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+    			${name}
+    			<span class="badge bg-primary rounded-pill">${qty}</span>
+  				</li>`
+	$('#citems').append(mystr);
+}
+
+}
+else{
+
+	mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+		    			Sorry We are not able to fetch the order associated with this order Id. Make sure to enter correct order Id</li>`
+	$('#items').append(mystr);	
+	$('#citems').append(mystr);
+}
+
+
+
+
+
+
+});
+event.preventDefault();
+
+})
+</script>
+
+
+{% endblock %}

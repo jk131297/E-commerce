@@ -1,0 +1,45 @@
+{% extends 'basic.html' %}
+ {% block titleh %}
+    Contact Us - Vegcheap | Contact Vegcheap | Vegcheap Complain| Vegcheap Problems | Vegcheap Query     
+    {% endblock titleh%}
+    {% block meta %}
+   <meta name="description" property="og:description" content=" contact us at vegcheap, tell your problems with vegcheap here, send your query to your problemns here, contact us through our number, vegcheap 24/7 service, contact us for any problems related to vegcheap  ">
+  <meta name="keywords" content=" vegcheap contact, file a Complain for vegcheap, vegcheap complains ,contact us at vegcheap, tell your problems with vegcheap here, send your query to your problemns here, contact us through our number, vegcheap 24/7 service, contact us for any problems related to vegcheap ">
+    {% endblock meta %}
+{% block css %}
+body{
+background-color: #e3d9bb;
+}
+ {% endblock css %}
+{% block title %} Contact Us
+{% endblock title %}
+{% block body%}
+<div class = "container-fluid px-0 mb-4">
+<img src="/static/newphone.jfif" class="d-block w-100 " alt="...">
+</div>
+<div class="container mb-6 py-4">
+<h1 style="color: saddlebrown;" class="text-center">Contact Us</h1>
+<form method="POST" action="/contact/">
+{% csrf_token %}
+<div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
+  </div>
+<div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter you email">
+  </div>
+<div class="mb-3">
+    <label for="phone" class="form-label">Phone Number</label>
+    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter you phone Number">
+  </div>
+  <div class="mb-3">
+    <label for="desc" class="form-label">Tell me what you want to contact me for...</label>
+    <textarea class="form-control" id="desc" rows="3" name ="desc"></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit" >Submit</button>
+</form>
+ <h4 style="color: saddlebrown;" class="text-center">Call Us At: 7979810590 or 8085517039</h4>
+</div>
+{% endblock body %}
